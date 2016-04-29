@@ -3,5 +3,6 @@
 .project
 **/*.class
 bin/
+*.iml
 
 .settings/

@@ -6,8 +6,7 @@ import java.rmi.RemoteException;
 
 public interface Service extends Remote {
     
-    Multiplicator createMultiplicator() throws RemoteException;
-    
-    Counter createCounter() throws RemoteException;
+    String getInfos() throws RemoteException;
 
+    
 }

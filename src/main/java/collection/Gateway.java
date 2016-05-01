@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 /**
  * Gateway manager to access the database, thus it defines the functionalities required
  */
-public class Gateway {
+public abstract class Gateway {
 
     private static Database db = Database.getInstance();
 

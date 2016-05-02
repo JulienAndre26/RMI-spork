@@ -13,21 +13,21 @@ public class InfoService extends UnicastRemoteObject implements InfoServiceInter
     {    }
 
     @Override
-    public List<String> getLatestRegKey(int n) throws RemoteException
+    public List<String> getLatestRegKeys(int n) throws RemoteException
     {
-        return Gateway.getLatestRegKey(n);
+        return Gateway.getLatestRegKeys(n);
     }
 
     @Override
-    public List<String> getLatestUsedKey(int n) throws RemoteException
+    public List<String> getLatestUsedKeys(int n) throws RemoteException
     {
-        return Gateway.getLatestUsedKey(n);
+        return Gateway.getLatestUsedKeys(n);
     }
 
     @Override
-    public List<String> getMostUsedKey(int t) throws RemoteException
+    public List<String> getMostUsedKeys(int t) throws RemoteException
     {
-        return Gateway.getMostUsedKey(t);
+        return Gateway.getMostUsedKeys(t);
     }
 
 }

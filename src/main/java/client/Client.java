@@ -1,17 +1,11 @@
 package client;
 
-import java.rmi.RemoteException;
-import java.util.Hashtable;
-
-import javax.naming.CompositeName;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NameClassPair;
-import javax.naming.NamingEnumeration;
-import javax.naming.NamingException;
-
 import collection.CollectionServerInterface;
 import collection.InfoServiceInterface;
+
+import javax.naming.*;
+import java.rmi.RemoteException;
+import java.util.Hashtable;
 
 /**
  * The Class ClientRMI.
@@ -65,7 +59,7 @@ public class Client {
         InfoServiceInterface infoService = (InfoServiceInterface) collection.getInfoService();
         
         System.out.println("Get 2 last puts");
-        System.out.println(infoService.getLatestRegKey(2));
+        System.out.println(infoService.getLatestRegKeys(2));
                 
 
     }

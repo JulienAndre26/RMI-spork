@@ -19,7 +19,7 @@ public abstract class Gateway {
      *            the number of info we want to get
      * @return the keys
      */
-    public static List<String> getLatestRegKey(int n)
+    public static List<String> getLatestRegKeys(int n)
     {
         int i = 0;
         List<String> res = new ArrayList<>();
@@ -41,7 +41,7 @@ public abstract class Gateway {
      *            the number of key we want to get
      * @return the keys
      */
-    public static List<String> getLatestUsedKey(int n)
+    public static List<String> getLatestUsedKeys(int n)
     {
         int i = 0;
         List<String> res = new ArrayList<>();
@@ -64,7 +64,7 @@ public abstract class Gateway {
      *            want are
      * @return the keys
      */
-    public static List<String> getMostUsedKey(int t)
+    public static List<String> getMostUsedKeys(int t)
     {
         HashMap<String, Integer> count = new HashMap<>();
 
@@ -162,7 +162,7 @@ public abstract class Gateway {
         Gateway.put(k3, o3);
         Gateway.put(k4, o4);
 
-        System.out.println("3 last PUT actions : " + Gateway.getLatestRegKey(3));
+        System.out.println("3 last PUT actions : " + Gateway.getLatestRegKeys(3));
 
         System.out.println(Gateway.get(k1));
         System.out.println(Gateway.get(k3));
@@ -172,8 +172,8 @@ public abstract class Gateway {
         System.out.println(Gateway.get(k2));
         System.out.println(Gateway.get(k4));
 
-        System.out.println("4 let GET actions : " + Gateway.getLatestUsedKey(4));
+        System.out.println("4 let GET actions : " + Gateway.getLatestUsedKeys(4));
         
-        System.out.println("Most used keys : " + Gateway.getMostUsedKey(0));
+        System.out.println("Most used keys : " + Gateway.getMostUsedKeys(0));
     }
 }

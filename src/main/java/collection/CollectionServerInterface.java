@@ -14,4 +14,6 @@ public interface CollectionServerInterface extends Remote {
     InfoServiceInterface getInfoService() throws RemoteException;
     
     boolean put(String key, Object o) throws InvalidNameException, NamingException, RemoteException;
+    
+    Data get(String key) throws RemoteException;
 }

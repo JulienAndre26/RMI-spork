@@ -1,18 +1,18 @@
 package collection;
 
 import java.io.Serializable;
-import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 /**
  * The Class Data.
  */
-public class Data implements Serializable, Remote {
+public class Data implements Serializable, DataInterface {
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 5361228353280201599L;
 
     /** The object. */
-    public Object object;
+    private Object object;
 
     /**
      * Instantiates a new data.
@@ -23,6 +23,10 @@ public class Data implements Serializable, Remote {
     public Data(Object o)
     {
         object = o;
+    }
+    
+    public Object getObject() throws RemoteException {
+        return object;
     }
 
 }

@@ -18,7 +18,7 @@ public class CollectionServer extends UnicastRemoteObject implements CollectionS
     private static final long serialVersionUID = -8647662070129302333L;
 
     private static InfoServiceInterface infoService;
-    
+
     public static Context context;
 
     /**
@@ -50,17 +50,23 @@ public class CollectionServer extends UnicastRemoteObject implements CollectionS
      * @throws NamingException
      *             the naming exception
      */
-    public boolean put(String key, Object o) throws InvalidNameException, NamingException, RemoteException
+    public boolean put(String key, Object o) throws InvalidNameException, NamingException,
+            RemoteException
     {
         Data serialObj = new Data(o);
-        if (Gateway.put(key, o))
+        if (Gateway.put(key, serialObj))
             context.rebind(new CompositeName(key), serialObj);
         else
             return false;
 
         return true;
     }
-    
+
+    public Data get(String key) throws RemoteException
+    {
+        return (Data) Gateway.get(key);
+    }
+
     @Override
     public InfoServiceInterface getInfoService() throws RemoteException
     {
@@ -80,21 +86,22 @@ public class CollectionServer extends UnicastRemoteObject implements CollectionS
     {
         String url = "rmi://localhost";
         int port = 8082;
-        
+
         // Launching Server !
-        System.out.println("Launching Server");
+        System.out.print("> Launching Server");
 
         Hashtable<String, String> hashtableEnvironment = new Hashtable<String, String>();
         hashtableEnvironment.put(Context.INITIAL_CONTEXT_FACTORY,
                 "com.sun.jndi.rmi.registry.RegistryContextFactory");
+        System.out.print(".");
         hashtableEnvironment.put(Context.PROVIDER_URL, url + ":" + port);
-        
+        System.out.print(".");
         CollectionServer.context = new InitialContext(hashtableEnvironment);
-        
+        System.out.println(".");
         CollectionServer.context.bind("CollectionServer", new CollectionServer());
-        
-        
-    }
 
+        System.out.println("> Server ready");
+
+    }
 
 }

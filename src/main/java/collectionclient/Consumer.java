@@ -51,7 +51,7 @@ public class Consumer {
         InfoServiceInterface infoService = (InfoServiceInterface) collection.getInfoService();
         
         System.out.println(">> Get 2 last puts");
-        System.out.println(infoService.getLatestRegKey(2));
+        System.out.println(infoService.getLatestRegKeys(2));
         
         System.out.println(">> Get KEY1");
         DataInterface data = collection.get("KEY1");
@@ -70,7 +70,7 @@ public class Consumer {
         collection.get("KEY2");
         
         System.out.println(">> Get Most Used Keys :");
-        System.out.println(infoService.getMostUsedKey(0));
+        System.out.println(infoService.getMostUsedKeys(0));
                 
     }
 }

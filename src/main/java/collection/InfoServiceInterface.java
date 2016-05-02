@@ -1,10 +1,11 @@
 package collection;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
 
-public interface InfoServiceInterface {
+public interface InfoServiceInterface extends Remote {
     
     /**
      * Gets the latest reg key.

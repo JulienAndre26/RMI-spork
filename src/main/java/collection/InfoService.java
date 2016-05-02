@@ -26,10 +26,10 @@ public class InfoService extends UnicastRemoteObject implements InfoServiceInter
      * @see collection.InfoServiceInterface#getLatestRegKey(int)
      */
     @Override
-    public List<String> getLatestRegKey(int n) throws RemoteException
+    public List<String> getLatestRegKeys(int n) throws RemoteException
     {
         System.out.println("GET LAST REGISTERED KEYS");
-        return Gateway.getLatestRegKey(n);
+        return Gateway.getLatestRegKeys(n);
     }
 
     /*
@@ -37,10 +37,10 @@ public class InfoService extends UnicastRemoteObject implements InfoServiceInter
      * @see collection.InfoServiceInterface#getLatestUsedKey(int)
      */
     @Override
-    public List<String> getLatestUsedKey(int n) throws RemoteException
+    public List<String> getLatestUsedKeys(int n) throws RemoteException
     {
         System.out.println("GET LAST USED KEYS");
-        return Gateway.getLatestUsedKey(n);
+        return Gateway.getLatestUsedKeys(n);
     }
 
     /*
@@ -48,10 +48,11 @@ public class InfoService extends UnicastRemoteObject implements InfoServiceInter
      * @see collection.InfoServiceInterface#getMostUsedKey(int)
      */
     @Override
-    public List<String> getMostUsedKey(int t) throws RemoteException
+    public List<String> getMostUsedKeys(int t) throws RemoteException
     {
         System.out.println("GET MOST USED KEYS");
-        return Gateway.getMostUsedKey(t);
+        return Gateway.getMostUsedKeys(t);
+
     }
 
 }

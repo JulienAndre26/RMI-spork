@@ -16,7 +16,7 @@ public interface InfoServiceInterface extends Remote {
      * @throws RemoteException
      *             the remote exception
      */
-    List<String> getLatestRegKey(int n) throws RemoteException;
+    List<String> getLatestRegKeys(int n) throws RemoteException;
 
     /**
      * Gets the latest used key.
@@ -27,7 +27,7 @@ public interface InfoServiceInterface extends Remote {
      * @throws RemoteException
      *             the remote exception
      */
-    List<String> getLatestUsedKey(int n) throws RemoteException;
+    List<String> getLatestUsedKeys(int n) throws RemoteException;
 
     /**
      * Gets the most used key.
@@ -38,6 +38,6 @@ public interface InfoServiceInterface extends Remote {
      * @throws RemoteException
      *             the remote exception
      */
-    List<String> getMostUsedKey(int t) throws RemoteException;
+    List<String> getMostUsedKeys(int t) throws RemoteException;
 
 }

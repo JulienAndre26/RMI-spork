@@ -4,6 +4,6 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 
-public interface DataInterface extends Remote {
+public interface DistantObjectInterface extends Remote {
     Object getObject() throws RemoteException; 
 }

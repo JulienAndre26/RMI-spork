@@ -15,5 +15,5 @@ public interface CollectionServerInterface extends Remote {
     
     boolean put(String key, Object o) throws InvalidNameException, NamingException, RemoteException;
     
-    Data get(String key) throws RemoteException;
+    DistantObject get(String key) throws RemoteException;
 }

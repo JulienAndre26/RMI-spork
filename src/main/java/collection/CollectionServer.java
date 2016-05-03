@@ -53,7 +53,7 @@ public class CollectionServer extends UnicastRemoteObject implements CollectionS
     public boolean put(String key, Object o) throws InvalidNameException, NamingException,
             RemoteException
     {
-        Data serialObj = new Data(o);
+        DistantObject serialObj = new DistantObject(o);
         if (Gateway.put(key, serialObj))
             context.rebind(new CompositeName(key), serialObj);
         else
@@ -62,9 +62,9 @@ public class CollectionServer extends UnicastRemoteObject implements CollectionS
         return true;
     }
 
-    public Data get(String key) throws RemoteException
+    public DistantObject get(String key) throws RemoteException
     {
-        return (Data) Gateway.get(key);
+        return (DistantObject) Gateway.get(key);
     }
 
     @Override

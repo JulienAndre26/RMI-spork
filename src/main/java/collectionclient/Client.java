@@ -1,0 +1,268 @@
+package collectionclient;
+
+import java.rmi.RemoteException;
+import java.util.Hashtable;
+import java.util.List;
+
+import javax.naming.CompositeName;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.InvalidNameException;
+import javax.naming.NamingException;
+
+import utils.Utils;
+import collection.CollectionServerInterface;
+import collectionclient.interfaces.DataInterface;
+import collectionclient.interfaces.ServiceInterface;
+
+/**
+ * The Class Client.
+ */
+public class Client {
+
+    /** The name. */
+    private String name;
+
+    /** The url. */
+    private String url;
+
+    /** The port. */
+    private int port;
+
+    /** The hashtable environment. */
+    private Hashtable<String, String> hashtableEnvironment;
+
+    /** The context. */
+    private Context context;
+
+    /** The collection. */
+    private CollectionServerInterface collection;
+
+    /** The current service. */
+    private ServiceInterface currentService;
+
+    /**
+     * Instantiates a new client.
+     * 
+     * @param name
+     *            the name
+     * @param url
+     *            the url
+     * @param port
+     *            the port
+     */
+    public Client(String name, String url, int port)
+    {
+        this.name = name.toUpperCase();
+        this.url = url;
+        this.port = port;
+    }
+
+    /**
+     * Connect.
+     * 
+     * @throws NamingException
+     *             the naming exception
+     */
+    public void connect() throws NamingException
+    {
+        print("Connecting...");
+
+        // String url = "rmi://localhost";
+        // int port = 8082;
+
+        hashtableEnvironment = new Hashtable<String, String>();
+        hashtableEnvironment.put(Context.INITIAL_CONTEXT_FACTORY,
+                "com.sun.jndi.rmi.registry.RegistryContextFactory");
+        hashtableEnvironment.put(Context.PROVIDER_URL, url + ":" + port);
+        context = new InitialContext(hashtableEnvironment);
+
+        collection = (CollectionServerInterface) context.lookup(new CompositeName(
+                "CollectionServer"));
+
+        print("Connected");
+    }
+
+    /**
+     * Put distant object.
+     * 
+     * @param key
+     *            the key
+     * @param o
+     *            the o
+     * @throws InvalidNameException
+     *             the invalid name exception
+     * @throws RemoteException
+     *             the remote exception
+     * @throws NamingException
+     *             the naming exception
+     */
+    public void putDistantObject(String key, Object o) throws InvalidNameException,
+            RemoteException, NamingException
+    {
+        String type = isData(o) ? "data" : (isService(o) ? "service" : "(unknown type)");
+
+        print("Put " + type + " with key " + key);
+        collection.put(key, o);
+    }
+
+    /**
+     * Checks if is data.
+     * 
+     * @param o
+     *            the o
+     * @return true, if is data
+     */
+    public boolean isData(Object o)
+    {
+        try
+        {
+            @SuppressWarnings("unused")
+            DataInterface d = (DataInterface) o;
+        }
+        catch (ClassCastException e)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Checks if is service.
+     * 
+     * @param o
+     *            the o
+     * @return true, if is service
+     */
+    public boolean isService(Object o)
+    {
+        try
+        {
+            @SuppressWarnings("unused")
+            ServiceInterface s = (ServiceInterface) o;
+        }
+        catch (ClassCastException e)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Gets the distant object.
+     * 
+     * @param key
+     *            the key
+     * @return the distant object
+     * @throws RemoteException
+     *             the remote exception
+     */
+    public void getDistantObject(String key) throws RemoteException
+    {
+        print("Get distant object with key " + key);
+        Object o = collection.get(key).getObject();
+
+        if (isService(o))
+        {
+
+            ServiceInterface service = (ServiceInterface) o;
+            print("Distant object is a service");
+
+            print("Service name: " + service.getServiceName());
+
+            this.currentService = service;
+        }
+        else if (isData(o))
+        {
+            DataInterface data = (DataInterface) o;
+            print("Distant object is a data");
+
+            print("Data name: " + data.getDataName());
+            print("Data value: " + data.getValue());
+        }
+        else
+            print("Unknown object class");
+
+    }
+
+    /**
+     * Execute current service.
+     * 
+     * @param args
+     *            the args
+     */
+    public void executeCurrentService(List<Object> args)
+    {
+        print("Executing service with arg(s): " + args);
+        print(this.currentService.executeService(args).toString());
+    }
+
+    /**
+     * Gets the context list.
+     * 
+     * @return the context list
+     * @throws NamingException
+     *             the naming exception
+     */
+    public void getContextList() throws NamingException
+    {
+        print("Get distant objects list");
+        Utils.printContextList(context);
+    }
+
+    /**
+     * Gets the last used keys.
+     * 
+     * @param n
+     *            the n
+     * @return the last used keys
+     * @throws RemoteException
+     *             the remote exception
+     */
+    public void getLastUsedKeys(int n) throws RemoteException
+    {
+        print(collection.getInfoService().getLatestUsedKeys(n).toString());
+    }
+
+    /**
+     * Gets the last registered keys.
+     * 
+     * @param n
+     *            the n
+     * @return the last registered keys
+     * @throws RemoteException
+     *             the remote exception
+     */
+    public void getLastRegisteredKeys(int n) throws RemoteException
+    {
+        print(collection.getInfoService().getLatestRegKeys(n).toString());
+    }
+
+    /**
+     * Gets the most used keys.
+     * 
+     * @param n
+     *            the n
+     * @return the most used keys
+     * @throws RemoteException
+     *             the remote exception
+     */
+    public void getMostUsedKeys(int n) throws RemoteException
+    {
+        print(collection.getInfoService().getMostUsedKeys(n).toString());
+    }
+
+    /**
+     * Prints the.
+     * 
+     * @param message
+     *            the message
+     */
+    private void print(String message)
+    {
+        System.out.println(name + "> " + message);
+    }
+
+}

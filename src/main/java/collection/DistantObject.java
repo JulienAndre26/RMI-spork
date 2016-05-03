@@ -6,7 +6,7 @@ import java.rmi.RemoteException;
 /**
  * The Class Data.
  */
-public class Data implements Serializable, DataInterface {
+public class DistantObject implements Serializable, DistantObjectInterface {
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 5361228353280201599L;
@@ -20,7 +20,7 @@ public class Data implements Serializable, DataInterface {
      * @param o
      *            the o
      */
-    public Data(Object o)
+    public DistantObject(Object o)
     {
         object = o;
     }

@@ -1,0 +1,1 @@
+java bin/classserver/ClassFileServer 2000 bin/collection/

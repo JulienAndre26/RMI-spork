@@ -12,6 +12,9 @@ public class Main {
     
     public static void main(String[] args) throws NamingException, RemoteException, InterruptedException
     {
+        if (System.getSecurityManager() == null)
+            System.setSecurityManager(new SecurityManager());
+        
         Client prod = new Client("Producer", "rmi://localhost", 8082);
         Client cons = new Client("Consumer", "rmi://localhost", 8082);
         prod.connect();

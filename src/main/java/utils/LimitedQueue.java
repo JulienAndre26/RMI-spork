@@ -10,6 +10,9 @@ import java.util.LinkedList;
  * @param <E> the type of the queue element
  */
 public class LimitedQueue<E> extends LinkedList<E> {
+
+    private static final long serialVersionUID = 3966629562809071447L;
+
     private int limit;
 
     public LimitedQueue(int limit) {

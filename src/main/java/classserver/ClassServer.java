@@ -60,7 +60,9 @@ public abstract class ClassServer implements Runnable {
             this.port = port;
             server = new java.net.ServerSocket(port);
         }
+        
         hostname = java.net.InetAddress.getLocalHost().getHostName();
+        
         newListener();
     }
 

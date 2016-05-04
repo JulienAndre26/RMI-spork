@@ -113,7 +113,7 @@ public class Client {
      *            the o
      * @return true, if is data
      */
-    public boolean isData(Object o)
+    private boolean isData(Object o)
     {
         try
         {
@@ -135,7 +135,7 @@ public class Client {
      *            the o
      * @return true, if is service
      */
-    public boolean isService(Object o)
+    private boolean isService(Object o)
     {
         try
         {
@@ -223,6 +223,7 @@ public class Client {
      */
     public void getLastUsedKeys(int n) throws RemoteException
     {
+        print("Get " + n + " last used keys:");
         print(collection.getInfoService().getLatestUsedKeys(n).toString());
     }
 
@@ -237,6 +238,7 @@ public class Client {
      */
     public void getLastRegisteredKeys(int n) throws RemoteException
     {
+        print("Get " + n + " last registered keys:");
         print(collection.getInfoService().getLatestRegKeys(n).toString());
     }
 
@@ -251,6 +253,7 @@ public class Client {
      */
     public void getMostUsedKeys(int n) throws RemoteException
     {
+        print("Get most used keys:");
         print(collection.getInfoService().getMostUsedKeys(n).toString());
     }
 

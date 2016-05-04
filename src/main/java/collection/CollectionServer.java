@@ -1,5 +1,7 @@
 package collection;
 
+import java.io.File;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Hashtable;
@@ -80,13 +82,15 @@ public class CollectionServer extends UnicastRemoteObject implements CollectionS
      *            the arguments
      * @throws NamingException
      *             the naming exception
-     * @throws RemoteException
+     * @throws IOException 
      */
-    public static void main(String[] args) throws NamingException, RemoteException
+    public static void main(String[] args) throws NamingException, IOException
     {
         String url = "rmi://localhost";
         int port = 8082;
 
+        System.out.println(new File(".").getCanonicalPath());
+        
         // Launching Server !
         System.out.print("> Launching Server");
 
@@ -98,7 +102,7 @@ public class CollectionServer extends UnicastRemoteObject implements CollectionS
         System.out.print(".");
         CollectionServer.context = new InitialContext(hashtableEnvironment);
         System.out.println(".");
-        CollectionServer.context.bind("CollectionServer", new CollectionServer());
+        CollectionServer.context.bind(new CompositeName("CollectionServer"), new CollectionServer());
 
         System.out.println("> Server ready");
 

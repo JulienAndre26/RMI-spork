@@ -1,6 +1,6 @@
 package client;
 
-import java.rmi.RemoteException;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,12 +30,8 @@ public class MainClient {
         System.out.println("--------- ---------");
     }
 
-    public static void main(String[] args) throws NamingException, RemoteException,
-            InterruptedException
+    public static void main(String[] args) throws NamingException, InterruptedException, IOException
     {
-        if (System.getSecurityManager() == null)
-            System.setSecurityManager(new SecurityManager());
-
         Client prod = new Client("Producer", "rmi://localhost", 8082);
         Client cons = new Client("Consumer", "rmi://localhost", 8082);
 
@@ -56,7 +52,7 @@ public class MainClient {
         cons.executeCurrentService(sampleTwo);
         sep();
         prod.putDistantObject("PiData", new DataPi());
-        prod.putDistantObject("AppendService", new ServiceAppend("La concaténation pour les nuls"));
+        prod.putDistantObject("AppendService", new ServiceAppend("La concatï¿½nation pour les nuls"));
         sep();
         cons.getDistantObjectsList();
         cons.getDistantObject("PiData");

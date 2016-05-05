@@ -124,7 +124,7 @@ public abstract class Gateway {
         // add object to collection
         db.getObjectCollection().put(key, obj);
 
-        System.out.println("PUT {key=" + key + ";obj=" + obj + "}");
+        System.out.println("SERVER> Gateway: Put {key=" + key + "; obj=" + obj + "}");
 
         // success
         return true;
@@ -139,7 +139,7 @@ public abstract class Gateway {
      */
     public static Object get(String key)
     {
-        System.out.println("GET {" + key + "}");
+        System.out.println("SERVER> Gateway: Get {key=" + key + "}");
 
         // check if key already exists
         if (!db.getObjectCollection().containsKey(key))
@@ -154,6 +154,8 @@ public abstract class Gateway {
 
     public static void main(String[] args)
     {
+    	// DATABASE TESTS
+    	
         Integer o1 = 1, o2 = 2, o3 = 3, o4 = 4;
         String k1 = "a", k2 = "b", k3 = "c", k4 = "d";
 

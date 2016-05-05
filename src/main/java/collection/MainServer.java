@@ -1,48 +1,59 @@
 package collection;
 
-import java.io.File;
 import java.io.IOException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.ExportException;
 import java.util.Hashtable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.naming.CompositeName;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import com.sun.security.ntlm.Server;
+
 public class MainServer {
 
-    /**
-     * The main method.
-     * 
-     * @param args
-     *            the arguments
-     * @throws NamingException
-     *             the naming exception
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    public static void main(String[] args) throws NamingException, IOException
-    {
-        String url = "rmi://localhost";
-        int port = 8082;
+	/**
+	 * The main method.
+	 * 
+	 * @param args
+	 *            the arguments
+	 * @throws NamingException
+	 *             the naming exception
+	 * @throws RemoteException
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public static void main(String[] args) throws NamingException,
+			RemoteException {
+		String url = "rmi://localhost";
+		int port = 8082;
 
-        System.out.println(new File(".").getCanonicalPath());
+		try {
+			url = (args[0] == null) ? "rmi://localhost" : args[0];
+			port = (args[1] == null) ? 8082 : Integer.parseInt(args[1]);
+		} catch (ArrayIndexOutOfBoundsException e) {
+		}
 
-        // Launching Server !
-        System.out.print("> Launching Server");
+		// Launching Server !
+		System.out.print("SERVER> Launching on " + url + ":" + port);
 
-        Hashtable<String, String> hashtableEnvironment = new Hashtable<String, String>();
-        hashtableEnvironment.put(Context.INITIAL_CONTEXT_FACTORY,
-                "com.sun.jndi.rmi.registry.RegistryContextFactory");
-        System.out.print(".");
-        hashtableEnvironment.put(Context.PROVIDER_URL, url + ":" + port);
-        System.out.print(".");
-        CollectionServer.context = new InitialContext(hashtableEnvironment);
-        System.out.println(".");
-        CollectionServer.context
-                .bind(new CompositeName("CollectionServer"), new CollectionServer());
+		Hashtable<String, String> hashtableEnvironment = new Hashtable<String, String>();
+		hashtableEnvironment.put(Context.INITIAL_CONTEXT_FACTORY,
+				"com.sun.jndi.rmi.registry.RegistryContextFactory");
+		System.out.print(".");
+		hashtableEnvironment.put(Context.PROVIDER_URL, url + ":" + port);
+		System.out.print(".");
+		CollectionServer.context = new InitialContext(hashtableEnvironment);
+		System.out.println(".");
+		CollectionServer.context.bind(new CompositeName("CollectionServer"),
+				new CollectionServer());
 
-        System.out.println("> Server ready");
-
-    }
+		System.out.println("SERVER> Server ready\n");
+	}
 }

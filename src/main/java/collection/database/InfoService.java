@@ -34,6 +34,8 @@ public class InfoService extends UnicastRemoteObject implements InfoServiceInter
     @Override
     public String getDistantObjectsList() throws NamingException
     {
+    	System.out.println("SERVER> InfoService: Get distant objects lists");
+    	
         String res = "";
         
         NamingEnumeration<NameClassPair> list = context.list("");
@@ -56,7 +58,7 @@ public class InfoService extends UnicastRemoteObject implements InfoServiceInter
     @Override
     public List<String> getLatestRegKeys(int n) throws RemoteException
     {
-        System.out.println("GET LAST REGISTERED KEYS");
+        System.out.println("SERVER> InfoService: Get last registered keys");
         return Gateway.getLatestRegKeys(n);
     }
 
@@ -67,7 +69,7 @@ public class InfoService extends UnicastRemoteObject implements InfoServiceInter
     @Override
     public List<String> getLatestUsedKeys(int n) throws RemoteException
     {
-        System.out.println("GET LAST USED KEYS");
+        System.out.println("SERVER> InfoService: Get last used keys");
         return Gateway.getLatestUsedKeys(n);
     }
 
@@ -78,7 +80,7 @@ public class InfoService extends UnicastRemoteObject implements InfoServiceInter
     @Override
     public List<String> getMostUsedKeys(int t) throws RemoteException
     {
-        System.out.println("GET MOST USED KEYS");
+        System.out.println("SERVER> InfoService: Get most used keys");
         return Gateway.getMostUsedKeys(t);
 
     }

@@ -31,4 +31,11 @@ public class DistantObject implements Serializable, DistantObjectInterface {
         return object;
     }
 
+	@Override
+	public String toString() {
+		return object.toString();
+	}
+    
+    
+
 }

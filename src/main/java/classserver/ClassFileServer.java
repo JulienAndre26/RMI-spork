@@ -114,18 +114,12 @@ public class ClassFileServer extends ClassServer {
      */
     public static void main(String args[])
     {
+        if (System.getSecurityManager() == null)
+            System.setSecurityManager(new SecurityManager());
+        
         int port = 2000;
         String classpath = "";
-        
-        try
-        {
-            System.out.println(new File(".").getCanonicalPath());
-        }
-        catch (IOException e1)
-        {
-            e1.printStackTrace();
-        }
-        
+                
         if (args.length >= 1)
         {
             port = Integer.parseInt(args[0]);

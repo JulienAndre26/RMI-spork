@@ -1,4 +1,4 @@
-package collectionclient.interfaces;
+package client.interfaces;
 
 import java.io.Serializable;
 

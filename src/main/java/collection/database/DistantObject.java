@@ -1,7 +1,9 @@
-package collection;
+package collection.database;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
+
+import collection.interfaces.DistantObjectInterface;
 
 /**
  * The Class Data.

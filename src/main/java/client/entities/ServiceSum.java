@@ -1,8 +1,8 @@
-package collectionclient;
+package client.entities;
 
 import java.util.List;
 
-import collectionclient.interfaces.ServiceInterface;
+import client.interfaces.ServiceInterface;
 
 public class ServiceSum implements ServiceInterface {
 
@@ -30,7 +30,7 @@ public class ServiceSum implements ServiceInterface {
             try {
                 i = (Integer) o;
             } catch (ClassCastException e){
-                System.out.println("Can't cast into integer");
+                System.out.println("Can't cast " + o + " into integer");
             }
             
             res += i;            

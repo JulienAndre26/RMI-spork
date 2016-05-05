@@ -1,4 +1,4 @@
-package collectionclient;
+package client;
 
 import java.rmi.RemoteException;
 import java.util.Hashtable;
@@ -10,10 +10,11 @@ import javax.naming.InitialContext;
 import javax.naming.InvalidNameException;
 import javax.naming.NamingException;
 
-import utils.Utils;
-import collection.CollectionServerInterface;
-import collectionclient.interfaces.DataInterface;
-import collectionclient.interfaces.ServiceInterface;
+import client.interfaces.DataInterface;
+import client.interfaces.ServiceInterface;
+
+// TODO: ClassServer needs to work in order to delete this import
+import collection.interfaces.CollectionServerInterface;
 
 /**
  * The Class Client.
@@ -102,7 +103,7 @@ public class Client {
     {
         String type = isData(o) ? "data" : (isService(o) ? "service" : "(unknown type)");
 
-        print("Put " + type + " with key " + key);
+        print("Put " + type + " with key \"" + key + "\"");
         collection.put(key, o);
     }
 
@@ -161,14 +162,14 @@ public class Client {
      */
     public void getDistantObject(String key) throws RemoteException
     {
-        print("Get distant object with key " + key);
+        print("Get distant object with key \"" + key + "\"");
         Object o = collection.get(key).getObject();
 
         if (isService(o))
         {
 
             ServiceInterface service = (ServiceInterface) o;
-            print("Distant object is a service");
+            print("Distant object \""+ key + "\" is a service");
 
             print("Service name: " + service.getServiceName());
 
@@ -177,7 +178,7 @@ public class Client {
         else if (isData(o))
         {
             DataInterface data = (DataInterface) o;
-            print("Distant object is a data");
+            print("Distant object \""+ key + "\" is a data");
 
             print("Data name: " + data.getDataName());
             print("Data value: " + data.getValue());
@@ -205,11 +206,12 @@ public class Client {
      * @return the context list
      * @throws NamingException
      *             the naming exception
+     * @throws RemoteException 
      */
-    public void getContextList() throws NamingException
+    public void getDistantObjectsList() throws NamingException, RemoteException
     {
         print("Get distant objects list");
-        Utils.printContextList(context);
+        System.out.println(collection.getInfoService().getDistantObjectsList());
     }
 
     /**

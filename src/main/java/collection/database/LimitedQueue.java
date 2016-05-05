@@ -1,4 +1,4 @@
-package utils;
+package collection.database;
 
 /**
  * Created by user on 29/04/2016.

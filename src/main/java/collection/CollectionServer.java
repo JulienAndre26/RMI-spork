@@ -1,42 +1,45 @@
 package collection;
 
-import java.io.File;
-import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Hashtable;
 
 import javax.naming.CompositeName;
 import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.naming.InvalidNameException;
 import javax.naming.NamingException;
+
+import collection.database.DistantObject;
+import collection.database.Gateway;
+import collection.database.InfoService;
+import collection.interfaces.CollectionServerInterface;
+import collection.interfaces.InfoServiceInterface;
 
 /**
  * The Class CollectionServer.
  */
 public class CollectionServer extends UnicastRemoteObject implements CollectionServerInterface {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -8647662070129302333L;
 
+    /** The info service. */
     private static InfoServiceInterface infoService;
 
+    /** The context. */
     public static Context context;
 
     /**
      * Instantiates a new collection server.
      * 
-     * @param url
-     *            the url
-     * @param port
-     *            the port
      * @throws NamingException
      *             the naming exception
+     * @throws RemoteException
+     *             the remote exception
      */
     public CollectionServer() throws NamingException, RemoteException
     {
         // Init
-        infoService = new InfoService();
+        infoService = new InfoService(context);
     }
 
     /**
@@ -51,6 +54,8 @@ public class CollectionServer extends UnicastRemoteObject implements CollectionS
      *             the invalid name exception
      * @throws NamingException
      *             the naming exception
+     * @throws RemoteException
+     *             the remote exception
      */
     public boolean put(String key, Object o) throws InvalidNameException, NamingException,
             RemoteException
@@ -64,48 +69,22 @@ public class CollectionServer extends UnicastRemoteObject implements CollectionS
         return true;
     }
 
+    /*
+     * (non-Javadoc)
+     * @see collection.CollectionServerInterface#get(java.lang.String)
+     */
     public DistantObject get(String key) throws RemoteException
     {
         return (DistantObject) Gateway.get(key);
     }
 
+    /*
+     * (non-Javadoc)
+     * @see collection.CollectionServerInterface#getInfoService()
+     */
     @Override
     public InfoServiceInterface getInfoService() throws RemoteException
     {
         return infoService;
     }
-
-    /**
-     * The main method.
-     * 
-     * @param args
-     *            the arguments
-     * @throws NamingException
-     *             the naming exception
-     * @throws IOException 
-     */
-    public static void main(String[] args) throws NamingException, IOException
-    {
-        String url = "rmi://localhost";
-        int port = 8082;
-
-        System.out.println(new File(".").getCanonicalPath());
-        
-        // Launching Server !
-        System.out.print("> Launching Server");
-
-        Hashtable<String, String> hashtableEnvironment = new Hashtable<String, String>();
-        hashtableEnvironment.put(Context.INITIAL_CONTEXT_FACTORY,
-                "com.sun.jndi.rmi.registry.RegistryContextFactory");
-        System.out.print(".");
-        hashtableEnvironment.put(Context.PROVIDER_URL, url + ":" + port);
-        System.out.print(".");
-        CollectionServer.context = new InitialContext(hashtableEnvironment);
-        System.out.println(".");
-        CollectionServer.context.bind(new CompositeName("CollectionServer"), new CollectionServer());
-
-        System.out.println("> Server ready");
-
-    }
-
 }

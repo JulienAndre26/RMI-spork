@@ -1,6 +1,7 @@
-package collectionclient;
+package client.entities;
 
-import collectionclient.interfaces.DataInterface;
+import client.interfaces.DataInterface;
+
 
 /**
  * The Class TestObject.

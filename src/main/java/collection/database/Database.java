@@ -1,6 +1,4 @@
-package collection;
-
-import utils.LimitedQueue;
+package collection.database;
 
 import java.util.HashMap;
 import java.util.Map;

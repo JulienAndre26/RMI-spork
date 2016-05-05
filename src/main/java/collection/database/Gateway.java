@@ -1,4 +1,4 @@
-package collection;
+package collection.database;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,2 +1,2 @@
 cd bin
-java -Djava.rmi.server.useCodebaseOnly=false -Djava.security.policy="../perm.txt" client.MainClient
+java -Djava.rmi.server.useCodebaseOnly=false -Djava.security.policy="../permissions.policy" client.MainClient

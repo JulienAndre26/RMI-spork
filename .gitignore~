@@ -1,7 +1,0 @@
-.classpath
-.idea
-.project
-**/out/**/*.class
-*.iml
-
-.settings/

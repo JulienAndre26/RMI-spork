@@ -29,6 +29,10 @@ mkdir -p $CLIENT_DIR/bin
 cp -R $BIN_DIR/client $CLIENT_DIR/bin
 cp ./scripts/runClient.sh permissions.policy $CLIENT_DIR
 
+# Deploy RMI Registry script
+echo 'Deploy RMI Registry script...'
+cp ./scripts/runRMIRegistry.sh $OUTPUT_DIR/runRMIRegistry.sh
+
 # Some informaitons
 echo "Deployment done in $OUTPUT_DIR"
-echo 'Running order : ClassServer > Server > Client'
+echo 'Running order : ClassServer > RMI Registry > Server > Client'

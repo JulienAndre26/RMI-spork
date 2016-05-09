@@ -80,7 +80,7 @@ public class InfoService extends UnicastRemoteObject implements InfoServiceInter
     @Override
     public List<String> getMostUsedKeys(int t) throws RemoteException
     {
-        System.out.println("SERVER> InfoService: Get most used keys");
+        System.out.println("SERVER> InfoService: Get " + t + " most used keys");
         return Gateway.getMostUsedKeys(t);
 
     }

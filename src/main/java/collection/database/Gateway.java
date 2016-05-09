@@ -80,10 +80,14 @@ public abstract class Gateway {
                 count.put(key, 1);
         }
 
+        int i = 0;
         // Ordering keys according to counts
         List<String> res = new ArrayList<>();
         while (!count.isEmpty())
         {
+        	if (i >= t)
+        		break;
+        	
             String bestKey = null;
             int bestCount = -1;
 
@@ -98,6 +102,7 @@ public abstract class Gateway {
 
             res.add(bestKey);
             count.remove(bestKey);
+            i++;
         }
 
         return res;

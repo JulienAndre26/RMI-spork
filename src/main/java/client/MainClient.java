@@ -65,6 +65,6 @@ public class MainClient {
         sep();
         cons.getLastRegisteredKeys(2);
         cons.getLastUsedKeys(1);
-        cons.getMostUsedKeys(-1);
+        cons.getMostUsedKeys(3);
     }
 }

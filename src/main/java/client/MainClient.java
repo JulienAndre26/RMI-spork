@@ -12,7 +12,7 @@ import client.entities.ServiceAppend;
 import client.entities.ServiceSum;
 
 /**
- * The Class ClientRMI.
+ * The Class MainClient which simulates both Producer and Consumer clients.
  */
 public class MainClient {
 
@@ -38,31 +38,46 @@ public class MainClient {
         Client prod = new Client("Producer", "rmi://localhost", 8082);
         Client cons = new Client("Consumer", "rmi://localhost", 8082);
 
+        // Connection
         prod.connect();
         sep();
         cons.connect();
         sep();
+        
+        // Put Data in the collection
         prod.putDistantObject("HellData", new DataInteger("Hell", 666));
         sep();
+        
+        // Get Data from the collection
         cons.getDistantObjectsList();
         cons.getDistantObject("HellData");
         sep();
+        
+        // Put Service in the collection
         prod.putDistantObject("SumService", new ServiceSum("L'addition pour les nuls"));
         sep();
+        
+        // Get available objects in collection and Service
         cons.getDistantObjectsList();
         cons.getDistantObject("SumService");
         cons.executeCurrentService(sampleOne);
         cons.executeCurrentService(sampleTwo);
         sep();
+        
+        // Put Data and Service in collection
         prod.putDistantObject("PiData", new DataPi());
         prod.putDistantObject("AppendService", new ServiceAppend("La concat�nation pour les nuls"));
         sep();
+        
+        // Get available objects, Data and Service in collection
         cons.getDistantObjectsList();
         cons.getDistantObject("PiData");
         sep();
         cons.getDistantObject("AppendService");
         cons.executeCurrentService(Arrays.asList((Object) sampleOne, sampleTwo, sampleThree));
         sep();
+        
+        // Get statistics
         cons.getLastRegisteredKeys(2);
         cons.getLastUsedKeys(1);
         cons.getMostUsedKeys(3);

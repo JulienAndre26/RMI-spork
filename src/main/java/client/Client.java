@@ -17,29 +17,29 @@ import client.interfaces.ServiceInterface;
 import collection.interfaces.CollectionServerInterface;
 
 /**
- * The Class Client.
+ * The Class Client. A client interacts with the colleciton server.
  */
 public class Client {
 
-    /** The name. */
+    /** The client name. */
     private String name;
 
-    /** The url. */
+    /** The rmi url. */
     private String url;
 
-    /** The port. */
+    /** The rmi port. */
     private int port;
 
     /** The hashtable environment. */
     private Hashtable<String, String> hashtableEnvironment;
 
-    /** The context. */
+    /** The server context. */
     private Context context;
 
-    /** The collection. */
+    /** The server collection. */
     private CollectionServerInterface collection;
 
-    /** The current service. */
+    /** The last downloaded service. */
     private ServiceInterface currentService;
 
     /**
@@ -69,15 +69,14 @@ public class Client {
     {
         print("Connecting...");
 
-        // String url = "rmi://localhost";
-        // int port = 8082;
-
+        // Configuring connection
         hashtableEnvironment = new Hashtable<String, String>();
         hashtableEnvironment.put(Context.INITIAL_CONTEXT_FACTORY,
                 "com.sun.jndi.rmi.registry.RegistryContextFactory");
         hashtableEnvironment.put(Context.PROVIDER_URL, url + ":" + port);
         context = new InitialContext(hashtableEnvironment);
 
+        // Getting collection server
         collection = (CollectionServerInterface) context.lookup(new CompositeName(
                 "CollectionServer"));
 
@@ -85,7 +84,7 @@ public class Client {
     }
 
     /**
-     * Put distant object.
+     * Put an object in the server collection.
      * 
      * @param key
      *            the key
@@ -101,14 +100,16 @@ public class Client {
     public void putDistantObject(String key, Object o) throws InvalidNameException,
             RemoteException, NamingException
     {
+    	// Checking object type
         String type = isData(o) ? "data" : (isService(o) ? "service" : "(unknown type)");
 
+        // Putting object
         print("Put " + type + " with key \"" + key + "\"");
         collection.put(key, o);
     }
 
     /**
-     * Checks if is data.
+     * Checks if an object is a data.
      * 
      * @param o
      *            the o
@@ -130,7 +131,7 @@ public class Client {
     }
 
     /**
-     * Checks if is service.
+     * Checks if an object is a service.
      * 
      * @param o
      *            the o
@@ -152,7 +153,7 @@ public class Client {
     }
 
     /**
-     * Gets the distant object.
+     * Gets an object referenced by a key from the collection server.
      * 
      * @param key
      *            the key
@@ -165,6 +166,7 @@ public class Client {
         print("Get distant object with key \"" + key + "\"");
         Object o = collection.get(key).getObject();
 
+        // Checking & Casting object type
         if (isService(o))
         {
 
@@ -189,7 +191,7 @@ public class Client {
     }
 
     /**
-     * Execute current service.
+     * Execute the last downloaded service.
      * 
      * @param args
      *            the args
@@ -201,7 +203,7 @@ public class Client {
     }
 
     /**
-     * Gets the context list.
+     * Gets the object list available on the server.
      * 
      * @return the context list
      * @throws NamingException
@@ -215,7 +217,7 @@ public class Client {
     }
 
     /**
-     * Gets the last used keys.
+     * Gets the last used object keys.
      * 
      * @param n
      *            the n
@@ -230,7 +232,7 @@ public class Client {
     }
 
     /**
-     * Gets the last registered keys.
+     * Gets the last registered object keys.
      * 
      * @param n
      *            the n
@@ -245,7 +247,7 @@ public class Client {
     }
 
     /**
-     * Gets the most used keys.
+     * Gets the most used object keys.
      * 
      * @param n
      *            the n
@@ -260,7 +262,7 @@ public class Client {
     }
 
     /**
-     * Prints the.
+     * Prints a message with client name.
      * 
      * @param message
      *            the message

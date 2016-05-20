@@ -6,23 +6,40 @@ package collection.database;
 import java.util.LinkedList;
 
 /**
- * FIFO limited generic queue
- * @param <E> the type of the queue element
+ * FIFO limited generic queue.
+ * 
+ * @param <E>
+ *            the type of the queue element
  */
 public class LimitedQueue<E> extends LinkedList<E> {
 
-    private static final long serialVersionUID = 3966629562809071447L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 3966629562809071447L;
 
-    private int limit;
+	/** The limit. */
+	private int limit;
 
-    public LimitedQueue(int limit) {
-        this.limit = limit;
-    }
+	/**
+	 * Instantiates a new limited queue.
+	 * 
+	 * @param limit
+	 *            the limit
+	 */
+	public LimitedQueue(int limit) {
+		this.limit = limit;
+	}
 
-    @Override
-    public boolean add(E o) {
-        addFirst(o);
-        while (size() > limit) { removeLast(); }
-        return true;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.LinkedList#add(java.lang.Object)
+	 */
+	@Override
+	public boolean add(E o) {
+		addFirst(o);
+		while (size() > limit) {
+			removeLast();
+		}
+		return true;
+	}
 }

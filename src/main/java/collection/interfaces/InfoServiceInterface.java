@@ -8,12 +8,12 @@ import javax.naming.NamingException;
 
 
 /**
- * The Interface InfoServiceInterface.
+ * The Interface InfoServiceInterface which defines the InfoService model.
  */
 public interface InfoServiceInterface extends Remote {
     
     /**
-     * Gets the latest reg key.
+     * Gets the latest registered key.
      * 
      * @param n
      *            the n
@@ -50,6 +50,7 @@ public interface InfoServiceInterface extends Remote {
      *
      * @return the distant object list
      * @throws NamingException the naming exception
+     * @throws RemoteException the remote exception
      */
     String getDistantObjectsList() throws NamingException, RemoteException;
 

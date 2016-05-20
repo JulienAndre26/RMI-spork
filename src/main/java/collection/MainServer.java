@@ -1,6 +1,5 @@
 package collection;
 
-import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.Hashtable;
 
@@ -9,6 +8,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+/**
+ * The Class MainServer which launch a single operating collection server.
+ */
 public class MainServer {
 
 	/**
@@ -19,11 +21,11 @@ public class MainServer {
 	 * @throws NamingException
 	 *             the naming exception
 	 * @throws RemoteException
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 *             the remote exception
 	 */
 	public static void main(String[] args) throws NamingException,
 			RemoteException {
+		
 		String url = "rmi://localhost";
 		int port = 8082;
 
@@ -48,5 +50,7 @@ public class MainServer {
 				new CollectionServer());
 
 		System.out.println("SERVER> Server ready\n");
+		
+		// Server can now treat client requests
 	}
 }

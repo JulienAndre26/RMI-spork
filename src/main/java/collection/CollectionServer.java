@@ -15,76 +15,64 @@ import collection.interfaces.CollectionServerInterface;
 import collection.interfaces.InfoServiceInterface;
 
 /**
- * The Class CollectionServer.
+ * The Class CollectionServer which allows to put objects in collection, get
+ * objects and statistics about the collection.
  */
-public class CollectionServer extends UnicastRemoteObject implements CollectionServerInterface {
+public class CollectionServer extends UnicastRemoteObject implements
+		CollectionServerInterface {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = -8647662070129302333L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = -8647662070129302333L;
 
-    /** The info service. */
-    private static InfoServiceInterface infoService;
+	/** The info service. */
+	private static InfoServiceInterface infoService;
 
-    /** The context. */
-    public static Context context;
+	/** The context. */
+	public static Context context;
 
-    /**
-     * Instantiates a new collection server.
-     * 
-     * @throws NamingException
-     *             the naming exception
-     * @throws RemoteException
-     *             the remote exception
-     */
-    public CollectionServer() throws NamingException, RemoteException
-    {
-        // Init
-        infoService = new InfoService(context);
-    }
+	/**
+	 * Instantiates a new collection server.
+	 * 
+	 * @throws NamingException
+	 *             the naming exception
+	 * @throws RemoteException
+	 *             the remote exception
+	 */
+	public CollectionServer() throws NamingException, RemoteException {
+		// Init
+		infoService = new InfoService(context);
+	}
 
-    /**
-     * Put.
-     * 
-     * @param key
-     *            the key
-     * @param o
-     *            the o
-     * @return true, if successful
-     * @throws InvalidNameException
-     *             the invalid name exception
-     * @throws NamingException
-     *             the naming exception
-     * @throws RemoteException
-     *             the remote exception
-     */
-    public boolean put(String key, Object o) throws InvalidNameException, NamingException,
-            RemoteException
-    {
-        DistantObject serialObj = new DistantObject(o);
-        if (Gateway.put(key, serialObj))
-            context.rebind(new CompositeName(key), serialObj);
-        else
-            return false;
+	/* (non-Javadoc)
+	 * @see collection.interfaces.CollectionServerInterface#put(java.lang.String, java.lang.Object)
+	 */
+	public boolean put(String key, Object o) throws InvalidNameException,
+			NamingException, RemoteException {
+		DistantObject serialObj = new DistantObject(o);
+		if (Gateway.put(key, serialObj))
+			context.rebind(new CompositeName(key), serialObj);
+		else
+			return false;
 
-        return true;
-    }
+		return true;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see collection.CollectionServerInterface#get(java.lang.String)
-     */
-    public DistantObject get(String key) throws RemoteException
-    {
-        return (DistantObject) Gateway.get(key);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see collection.CollectionServerInterface#get(java.lang.String)
+	 */
+	public DistantObject get(String key) throws RemoteException {
+		return (DistantObject) Gateway.get(key);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see collection.CollectionServerInterface#getInfoService()
-     */
-    @Override
-    public InfoServiceInterface getInfoService() throws RemoteException
-    {
-        return infoService;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see collection.CollectionServerInterface#getInfoService()
+	 */
+	@Override
+	public InfoServiceInterface getInfoService() throws RemoteException {
+		return infoService;
+	}
 }

@@ -1,20 +1,22 @@
 package client;
 
+import client.interfaces.DataInterface;
+import client.interfaces.ServiceInterface;
+import client.subscription.Publisher;
+import client.subscription.Subscriber;
+import client.subscription.messagelisteners.Reloader;
+import client.subscription.messagelisteners.Tilter;
+import collection.interfaces.CollectionServerInterface;
+
+import javax.naming.*;
 import java.rmi.RemoteException;
 import java.util.Hashtable;
 import java.util.List;
 
-import javax.naming.CompositeName;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.InvalidNameException;
-import javax.naming.NamingException;
-
-import client.interfaces.DataInterface;
-import client.interfaces.ServiceInterface;
+import static client.subscription.messagelisteners.AvailableListeners.RELOADER;
+import static client.subscription.messagelisteners.AvailableListeners.TILTER;
 
 // TODO: ClassServer needs to work in order to delete this import
-import collection.interfaces.CollectionServerInterface;
 
 /**
  * The Class Client. A client interacts with the colleciton server.
@@ -42,6 +44,19 @@ public class Client {
     /** The last downloaded service. */
     private ServiceInterface currentService;
 
+    private Publisher publisher;
+
+    private void initSubscriber(String role) {
+        if(role.equals(RELOADER)) // reloader listener
+        this.subscriber = new Subscriber(this, new Reloader(this));
+        else if (role.equals(TILTER)) // tilter listener
+            this.subscriber = new Subscriber(this, new Tilter(this));
+        else // default listener is a plain tilter
+            this.subscriber = new Subscriber(this, new Tilter(this));
+    }
+
+    private Subscriber subscriber;
+
     /**
      * Instantiates a new client.
      * 
@@ -52,11 +67,13 @@ public class Client {
      * @param port
      *            the port
      */
-    public Client(String name, String url, int port)
+    public Client(String name, String url, int port, String subscriberRole)
     {
         this.name = name.toUpperCase();
         this.url = url;
         this.port = port;
+        this.publisher = new Publisher(this);
+        initSubscriber(subscriberRole);
     }
 
     /**
@@ -272,4 +289,17 @@ public class Client {
         System.out.println(name + "> " + message);
     }
 
+    public void subscribe(String topicKey){
+        subscriber.subscribe(topicKey);
+    }
+
+    public void publish(String topicKey){
+        publisher.publish(topicKey);
+    }
+
+
+    // --- getters and setters
+    public String getName() {
+        return name;
+    }
 }

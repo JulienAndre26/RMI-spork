@@ -1,21 +1,8 @@
 package client.subscription;
 
-import java.util.Queue;
-
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.MessageListener;
-import javax.jms.MessageProducer;
-import javax.jms.Session;
-import javax.jms.TextMessage;
-import javax.jms.Topic;
-import javax.jms.TopicConnection;
-import javax.jms.TopicConnectionFactory;
-import javax.jms.TopicSession;
-
 import org.apache.activemq.ActiveMQConnectionFactory;
 
-import client.Client;
+import javax.jms.*;
 
 
 public class Example implements MessageListener {
@@ -24,10 +11,7 @@ public class Example implements MessageListener {
     private TopicSession sendSession = null;
     private TopicSession receiveSession = null;
     private MessageProducer sender = null;
-    private Queue queue = null;
     private Topic topic = null;
-    private Client publ;
-    private Client subs;
 
     private void configurer() {
 
@@ -58,8 +42,6 @@ public class Example implements MessageListener {
 
         //La queue etant cr�e, il peut y acc�der en mode producteur, au sein d'une session
         sendSession = connect.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
-        //queue = sendSession.createQueue("queueExo2");
-        //sender = sendSession.createProducer(queue);
         topic = sendSession.createTopic("PENIS");
         sender = sendSession.createPublisher(topic);
     }

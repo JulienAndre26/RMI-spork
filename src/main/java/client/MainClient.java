@@ -1,16 +1,18 @@
 package client;
 
+import client.entities.DataInteger;
+import client.entities.DataPi;
+import client.entities.ServiceAppend;
+import client.entities.ServiceSum;
+
+import javax.naming.NamingException;
 import java.io.IOException;
 import java.rmi.RMISecurityManager;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.naming.NamingException;
-
-import client.entities.DataInteger;
-import client.entities.DataPi;
-import client.entities.ServiceAppend;
-import client.entities.ServiceSum;
+import static client.subscription.messagelisteners.AvailableListeners.RELOADER;
+import static client.subscription.messagelisteners.AvailableListeners.TILTER;
 
 /**
  * The Class MainClient which simulates both Producer and Consumer clients.
@@ -38,8 +40,12 @@ public class MainClient {
 			System.setSecurityManager(new RMISecurityManager());
 		}
 
-		Client prod = new Client("Producer", "rmi://localhost", 8082);
-		Client cons = new Client("Consumer", "rmi://localhost", 8082);
+		String hellDataKey = "HellData";
+		String sumServiceKey = "SumService";
+
+		Client prod = new Client("Producer", "rmi://localhost", 8082, TILTER);
+		Client cons = new Client("Consumer", "rmi://localhost", 8082, TILTER);
+		Client reloader = new Client("Reloader", "rmi://localhost", 8082, RELOADER);
 
 		// Connection
 		prod.connect();
@@ -48,23 +54,60 @@ public class MainClient {
 		sep();
 
 		// Put Data in the collection
+<<<<<<< Updated upstream
 		DataInteger di = new DataInteger("Hell", 666);
 		prod.putDistantObject("HellData", di);
+=======
+		prod.putDistantObject(hellDataKey, new DataInteger("Hell", 666));
+>>>>>>> Stashed changes
 		sep();
+
+		// subscribe before HellData is published
+		cons.subscribe(hellDataKey);
+
+		System.out.println("BLBLBLBLBLBLBLBLB\nLBLBLBLBLBLBLBLBLB\nBLBLBLBLBLBLBLB");
+
+		// publish HellData
+		prod.publish(hellDataKey);
+
+		// reloader
+		reloader.subscribe(hellDataKey);
 
 		// Get Data from the collection
 		cons.getDistantObjectsList();
-		cons.getDistantObject("HellData");
+		cons.getDistantObject(hellDataKey);
 		sep();
 
+		// topiception
+		prod.subscribe(hellDataKey);
+
+		// a random guy who publish our lovely topic
+		cons.publish(hellDataKey);
+
+		// bleh
+		cons.subscribe(sumServiceKey);
+
 		// Put Service in the collection
+<<<<<<< Updated upstream
 		ServiceSum ss = new ServiceSum("L'addition pour les nuls");
 		prod.putDistantObject("SumService", ss);
+=======
+		prod.putDistantObject(sumServiceKey, new ServiceSum(
+				"L'addition pour les nuls"));
+>>>>>>> Stashed changes
 		sep();
+
+		// publish SurService
+		prod.publish(sumServiceKey);
+		// bleh
+		cons.subscribe(sumServiceKey);
+
+		// publish SurService
+		prod.publish(sumServiceKey);
 
 		// Get available objects in collection and Service
 		cons.getDistantObjectsList();
-		cons.getDistantObject("SumService");
+		cons.getDistantObject(sumServiceKey);
 		cons.executeCurrentService(sampleOne);
 		cons.executeCurrentService(sampleTwo);
 		sep();

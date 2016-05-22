@@ -1,5 +1,7 @@
 #!/bin/sh
 
+cd ..
+
 ./clean.sh
 
 # Directories

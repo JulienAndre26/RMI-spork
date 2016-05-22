@@ -1,3 +1,5 @@
+cd ..
+
 cd target
 
 cd ClassServer

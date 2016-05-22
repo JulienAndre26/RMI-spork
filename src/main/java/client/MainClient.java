@@ -48,7 +48,8 @@ public class MainClient {
 		sep();
 
 		// Put Data in the collection
-		prod.putDistantObject("HellData", new DataInteger("Hell", 666));
+		DataInteger di = new DataInteger("Hell", 666);
+		prod.putDistantObject("HellData", di);
 		sep();
 
 		// Get Data from the collection
@@ -57,8 +58,8 @@ public class MainClient {
 		sep();
 
 		// Put Service in the collection
-		prod.putDistantObject("SumService", new ServiceSum(
-				"L'addition pour les nuls"));
+		ServiceSum ss = new ServiceSum("L'addition pour les nuls");
+		prod.putDistantObject("SumService", ss);
 		sep();
 
 		// Get available objects in collection and Service
@@ -69,9 +70,10 @@ public class MainClient {
 		sep();
 
 		// Put Data and Service in collection
-		prod.putDistantObject("PiData", new DataPi());
-		prod.putDistantObject("AppendService", new ServiceAppend(
-				"La concat�nation pour les nuls"));
+		DataPi dp = new DataPi();
+		prod.putDistantObject("PiData", dp);
+		ServiceAppend sa = new ServiceAppend("La concatenation pour les nuls");
+		prod.putDistantObject("AppendService", sa);
 		sep();
 
 		// Get available objects, Data and Service in collection

@@ -28,6 +28,7 @@ echo 'Deploy client...'
 mkdir -p $CLIENT_DIR/bin
 cp -R $BIN_DIR/client $CLIENT_DIR/bin
 cp ./scripts/runClient.sh permissions.policy $CLIENT_DIR
+cp -R $SERVER_DIR/bin/collection $CLIENT_DIR/bin
 
 # Deploy RMI Registry script
 echo 'Deploy RMI Registry script...'

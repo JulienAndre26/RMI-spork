@@ -27,7 +27,7 @@ public class Reloader implements MessageListener {
             tmp= msg.split(" ");
             key = tmp[tmp.length - 1];
             client.getDistantObject(key);
-            System.out.println(client.getName() + "> Object reloaded.");
+            System.out.println(client.getName() + "> Object " + key + " reloaded.");
         } catch (JMSException e) {
             System.out.println("Error in casting message in TextMessage.");
             e.printStackTrace();

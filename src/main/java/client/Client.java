@@ -289,10 +289,18 @@ public class Client {
         System.out.println(name + "> " + message);
     }
 
+    /**
+     * subscribe to a topic
+     * @param topicKey
+     */
     public void subscribe(String topicKey){
         subscriber.subscribe(topicKey);
     }
 
+    /**
+     * publish a topic
+     * @param topicKey
+     */
     public void publish(String topicKey){
         publisher.publish(topicKey);
     }

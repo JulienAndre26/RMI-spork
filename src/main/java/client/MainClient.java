@@ -54,23 +54,16 @@ public class MainClient {
 		sep();
 
 		// Put Data in the collection
-<<<<<<< Updated upstream
-		DataInteger di = new DataInteger("Hell", 666);
-		prod.putDistantObject("HellData", di);
-=======
 		prod.putDistantObject(hellDataKey, new DataInteger("Hell", 666));
->>>>>>> Stashed changes
 		sep();
 
 		// subscribe before HellData is published
 		cons.subscribe(hellDataKey);
 
-		System.out.println("BLBLBLBLBLBLBLBLB\nLBLBLBLBLBLBLBLBLB\nBLBLBLBLBLBLBLB");
-
 		// publish HellData
 		prod.publish(hellDataKey);
 
-		// reloader
+		// reloader subscription
 		reloader.subscribe(hellDataKey);
 
 		// Get Data from the collection
@@ -84,22 +77,14 @@ public class MainClient {
 		// a random guy who publish our lovely topic
 		cons.publish(hellDataKey);
 
-		// bleh
-		cons.subscribe(sumServiceKey);
-
 		// Put Service in the collection
-<<<<<<< Updated upstream
-		ServiceSum ss = new ServiceSum("L'addition pour les nuls");
-		prod.putDistantObject("SumService", ss);
-=======
 		prod.putDistantObject(sumServiceKey, new ServiceSum(
 				"L'addition pour les nuls"));
->>>>>>> Stashed changes
 		sep();
 
 		// publish SurService
 		prod.publish(sumServiceKey);
-		// bleh
+		// subscribing
 		cons.subscribe(sumServiceKey);
 
 		// publish SurService

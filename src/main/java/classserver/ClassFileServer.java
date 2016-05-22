@@ -2,6 +2,7 @@ package classserver;
 
 import java.io.File;
 import java.io.IOException;
+import java.rmi.RMISecurityManager;
 
 /**
  * The ClassFileServer implements a ClassServer that reads class files from the file system. See the
@@ -114,8 +115,9 @@ public class ClassFileServer extends ClassServer {
      */
     public static void main(String args[])
     {
-        if (System.getSecurityManager() == null)
-            System.setSecurityManager(new SecurityManager());
+    	if (System.getSecurityManager() == null) {
+			System.setSecurityManager(new RMISecurityManager());
+		}
         
         int port = 2000;
         String classpath = "";

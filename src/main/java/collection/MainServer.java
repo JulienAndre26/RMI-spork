@@ -1,5 +1,6 @@
 package collection;
 
+import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 import java.util.Hashtable;
 
@@ -25,6 +26,10 @@ public class MainServer {
 	 */
 	public static void main(String[] args) throws NamingException,
 			RemoteException {
+		
+		if (System.getSecurityManager() == null) {
+			System.setSecurityManager(new RMISecurityManager());
+		}
 		
 		String url = "rmi://localhost";
 		int port = 8082;

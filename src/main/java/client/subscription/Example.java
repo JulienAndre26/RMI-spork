@@ -1,9 +1,21 @@
 package client.subscription;
 
-import client.Client;
+import java.util.Queue;
+
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageListener;
+import javax.jms.MessageProducer;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+import javax.jms.Topic;
+import javax.jms.TopicConnection;
+import javax.jms.TopicConnectionFactory;
+import javax.jms.TopicSession;
+
 import org.apache.activemq.ActiveMQConnectionFactory;
 
-import javax.jms.*;
+import client.Client;
 
 
 public class Example implements MessageListener {

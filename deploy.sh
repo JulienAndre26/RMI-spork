@@ -1,5 +1,7 @@
 #!/bin/sh
 
+./clean.sh
+
 # Directories
 BIN_DIR=./bin/
 OUTPUT_DIR=./target/

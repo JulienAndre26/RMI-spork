@@ -10,10 +10,15 @@ OUTPUT_DIR=./target/
 CLASSSERVER_DIR=$OUTPUT_DIR/ClassServer
 SERVER_DIR=$OUTPUT_DIR/Server
 CLIENT_DIR=$OUTPUT_DIR/Client
+LIB_DIR=$OUTPUT_DIR/lib
 
 # Clean output directory
 echo 'Clean output directory...'
 rm -rf $OUTPUT_DIR 2>/dev/null
+
+# Activemq library
+mkdir -p $LIB_DIR
+cp LIB ./lib/activemq-all-5.9.1.jar $LIB_DIR
 
 # Class Server
 echo 'Deploy class server...'
@@ -40,6 +45,9 @@ cp -R $BIN_DIR/collection/database $CLIENT_DIR/bin/collection    # (but it does 
 echo 'Deploy RMI Registry script...'
 cp ./scripts/runRMIRegistry.sh $OUTPUT_DIR/runRMIRegistry.sh && chmod +x $OUTPUT_DIR/runRMIRegistry.sh
 
-# Some informaitons
+# Some information
 echo "Deployment done in $OUTPUT_DIR"
 echo 'Running order : ClassServer > RMI Registry > Server > Client'
+
+# Blocking processus chutdown
+read "a"

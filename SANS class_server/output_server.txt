@@ -1,0 +1,17 @@
+SERVER> Launching on rmi://localhost:8082...
+SERVER> Server ready
+
+SERVER> Gateway: Put {key=HellData; obj=client.entities.DataInteger@78ed6944}
+SERVER> InfoService: Get distant objects lists
+SERVER> Gateway: Get {key=HellData}
+SERVER> Gateway: Put {key=SumService; obj=client.entities.ServiceSum@12044c07}
+SERVER> InfoService: Get distant objects lists
+SERVER> Gateway: Get {key=SumService}
+SERVER> Gateway: Put {key=PiData; obj=client.entities.DataPi@2a998a36}
+SERVER> Gateway: Put {key=AppendService; obj=client.entities.ServiceAppend@2869d646}
+SERVER> InfoService: Get distant objects lists
+SERVER> Gateway: Get {key=PiData}
+SERVER> Gateway: Get {key=AppendService}
+SERVER> InfoService: Get last registered keys
+SERVER> InfoService: Get last used keys
+SERVER> InfoService: Get 3 most used keys

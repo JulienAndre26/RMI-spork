@@ -1,0 +1,60 @@
+PRODUCER> Connecting...
+PRODUCER> Connected
+--------- ---------
+CONSUMER> Connecting...
+CONSUMER> Connected
+--------- ---------
+PRODUCER> Put data with key "HellData"
+--------- ---------
+CONSUMER> Get distant objects list
+	0: CollectionServer
+	1: HellData
+
+CONSUMER> Get distant object with key "HellData"
+CONSUMER> Distant object "HellData" is a data
+CONSUMER> Data name: Hell
+CONSUMER> Data value: 666
+--------- ---------
+PRODUCER> Put service with key "SumService"
+--------- ---------
+CONSUMER> Get distant objects list
+	0: CollectionServer
+	1: HellData
+	2: SumService
+
+CONSUMER> Get distant object with key "SumService"
+CONSUMER> Distant object "SumService" is a service
+CONSUMER> Service name: L'addition pour les nuls
+CONSUMER> Executing service with arg(s): [1, 3, 4]
+CONSUMER> 8
+CONSUMER> Executing service with arg(s): [2, 3, Pas un entier]
+Can't cast Pas un entier into integer
+CONSUMER> 5
+--------- ---------
+PRODUCER> Put data with key "PiData"
+PRODUCER> Put service with key "AppendService"
+--------- ---------
+CONSUMER> Get distant objects list
+	0: CollectionServer
+	1: AppendService
+	2: HellData
+	3: SumService
+	4: PiData
+
+CONSUMER> Get distant object with key "PiData"
+CONSUMER> Distant object "PiData" is a data
+CONSUMER> Data name: Pi
+CONSUMER> Data value: 3.141592653589793
+--------- ---------
+CONSUMER> Get distant object with key "AppendService"
+CONSUMER> Distant object "AppendService" is a service
+CONSUMER> Service name: La concatenation pour les nuls
+CONSUMER> Executing service with arg(s): [[1, 3, 4], [2, 3, Pas un entier], [2.5, 0.3, Baleine]]
+CONSUMER> [1, 3, 4, 2, 3, Pas un entier, 2.5, 0.3, Baleine]
+--------- ---------
+CONSUMER> Get 2 last registered keys:
+CONSUMER> [AppendService, PiData]
+CONSUMER> Get 1 last used keys:
+CONSUMER> [AppendService]
+CONSUMER> Get most used keys:
+CONSUMER> [HellData, AppendService, PiData]

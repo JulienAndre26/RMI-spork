@@ -295,6 +295,7 @@ public class Client {
      */
     public void subscribe(String topicKey){
         subscriber.subscribe(topicKey);
+        print("Subscribing to " + topicKey);
     }
 
     /**
@@ -303,6 +304,7 @@ public class Client {
      */
     public void publish(String topicKey){
         publisher.publish(topicKey);
+        print("Publishing " + topicKey);
     }
 
 

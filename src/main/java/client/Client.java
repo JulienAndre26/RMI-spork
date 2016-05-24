@@ -123,6 +123,7 @@ public class Client {
         // Putting object
         print("Put " + type + " with key \"" + key + "\"");
         collection.put(key, o);
+        publish(key);
     }
 
     /**
@@ -302,7 +303,7 @@ public class Client {
      * publish a topic
      * @param topicKey
      */
-    public void publish(String topicKey){
+    private void publish(String topicKey){
         publisher.publish(topicKey);
         print("Publishing " + topicKey);
     }

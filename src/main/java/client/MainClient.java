@@ -53,18 +53,15 @@ public class MainClient {
 		cons.connect();
 		sep();
 
-		// Put Data in the collection
-		prod.putDistantObject(hellDataKey, new DataInteger("Hell", 666));
-		sep();
-
 		// subscribe before HellData is published
 		cons.subscribe(hellDataKey);
 
-		// publish HellData
-		prod.publish(hellDataKey);
-
 		// reloader subscription
 		reloader.subscribe(hellDataKey);
+
+		// Put Data in the collection
+		prod.putDistantObject(hellDataKey, new DataInteger("Hell", 666));
+		sep();
 
 		// Get Data from the collection
 		cons.getDistantObjectsList();
@@ -74,21 +71,13 @@ public class MainClient {
 		// topiception
 		prod.subscribe(hellDataKey);
 
-		// a random guy who publish our lovely topic
-		cons.publish(hellDataKey);
-
 		// Put Service in the collection
 		prod.putDistantObject(sumServiceKey, new ServiceSum(
 				"L'addition pour les nuls"));
 		sep();
 
-		// publish SurService
-		prod.publish(sumServiceKey);
 		// subscribing
 		cons.subscribe(sumServiceKey);
-
-		// publish SurService
-		prod.publish(sumServiceKey);
 
 		// Get available objects in collection and Service
 		cons.getDistantObjectsList();
@@ -111,6 +100,10 @@ public class MainClient {
 		cons.getDistantObject("AppendService");
 		cons.executeCurrentService(Arrays.asList((Object) sampleOne, sampleTwo,
 				sampleThree));
+		sep();
+
+		// Put Data in the collection
+		prod.putDistantObject(hellDataKey, new DataInteger("Hell", 666));
 		sep();
 
 		// Get statistics

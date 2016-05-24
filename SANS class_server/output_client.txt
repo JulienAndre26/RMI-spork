@@ -4,18 +4,23 @@ PRODUCER> Connected
 CONSUMER> Connecting...
 CONSUMER> Connected
 --------- ---------
-PRODUCER> Put data with key "HellData"
---------- ---------
 log4j:WARN No appenders could be found for logger (org.apache.activemq.transport.WireFormatNegotiator).
 log4j:WARN Please initialize the log4j system properly.
 log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
 CONSUMER> Subscribing to HellData
-PRODUCER> Publishing HellData
-CONSUMER> PRODUCER has update HellData
 RELOADER> Subscribing to HellData
+PRODUCER> Put data with key "HellData"
+PRODUCER> Publishing HellData
+--------- ---------
 CONSUMER> Get distant objects list
+CONSUMER> PRODUCER has update HellData
+RELOADER> PRODUCER has update HellData
+RELOADER> Get distant object with key "HellData"
         0: CollectionServer
-        1: HellData
+        1: AppendService
+        2: HellData
+        3: SumService
+        4: PiData
 
 CONSUMER> Get distant object with key "HellData"
 CONSUMER> Distant object "HellData" is a data
@@ -23,21 +28,16 @@ CONSUMER> Data name: Hell
 CONSUMER> Data value: 666
 --------- ---------
 PRODUCER> Subscribing to HellData
-CONSUMER> Publishing HellData
 PRODUCER> Put service with key "SumService"
-RELOADER> CONSUMER has update HellData
-RELOADER> Get distant object with key "HellData"
-CONSUMER> CONSUMER has update HellData
-PRODUCER> CONSUMER has update HellData
+PRODUCER> Publishing SumService
 --------- ---------
-PRODUCER> Publishing SumService
 CONSUMER> Subscribing to SumService
-PRODUCER> Publishing SumService
 CONSUMER> Get distant objects list
-CONSUMER> PRODUCER has update SumService
         0: CollectionServer
-        1: HellData
-        2: SumService
+        1: AppendService
+        2: HellData
+        3: SumService
+        4: PiData
 
 CONSUMER> Get distant object with key "SumService"
 CONSUMER> Distant object "SumService" is a service
@@ -49,7 +49,9 @@ Can't cast Pas un entier into integer
 CONSUMER> 5
 --------- ---------
 PRODUCER> Put data with key "PiData"
+PRODUCER> Publishing PiData
 PRODUCER> Put service with key "AppendService"
+PRODUCER> Publishing AppendService
 --------- ---------
 CONSUMER> Get distant objects list
         0: CollectionServer
@@ -69,21 +71,40 @@ CONSUMER> Service name: La concatenation pour les nuls
 CONSUMER> Executing service with arg(s): [[1, 3, 4], [2, 3, Pas un entier], [2.5, 0.3, Baleine]]
 CONSUMER> [1, 3, 4, 2, 3, Pas un entier, 2.5, 0.3, Baleine]
 --------- ---------
+PRODUCER> Put data with key "HellData"
+CONSUMER> PRODUCER has update HellData
+PRODUCER> Publishing HellData
+--------- ---------
 CONSUMER> Get 2 last registered keys:
+PRODUCER> PRODUCER has update HellData
 CONSUMER> [AppendService, PiData]
 CONSUMER> Get 1 last used keys:
 CONSUMER> [AppendService]
 CONSUMER> Get most used keys:
 CONSUMER> [HellData, AppendService, PiData]
-RELOADER> CONSUMER has update HellData
+RELOADER> PRODUCER has update HellData
 RELOADER> Get distant object with key "HellData"
-RELOADER> CONSUMER has update HellData
+RELOADER> PRODUCER has update HellData
 RELOADER> Get distant object with key "HellData"
-RELOADER> CONSUMER has update HellData
+RELOADER> PRODUCER has update HellData
 RELOADER> Get distant object with key "HellData"
-RELOADER> CONSUMER has update HellData
+RELOADER> PRODUCER has update HellData
 RELOADER> Get distant object with key "HellData"
-RELOADER> CONSUMER has update HellData
+RELOADER> PRODUCER has update HellData
 RELOADER> Get distant object with key "HellData"
-RELOADER> CONSUMER has update HellData
+RELOADER> PRODUCER has update HellData
+RELOADER> Get distant object with key "HellData"
+RELOADER> PRODUCER has update HellData
+RELOADER> Get distant object with key "HellData"
+RELOADER> PRODUCER has update HellData
+RELOADER> Get distant object with key "HellData"
+RELOADER> PRODUCER has update HellData
+RELOADER> Get distant object with key "HellData"
+RELOADER> PRODUCER has update HellData
+RELOADER> Get distant object with key "HellData"
+RELOADER> PRODUCER has update HellData
+RELOADER> Get distant object with key "HellData"
+RELOADER> PRODUCER has update HellData
+RELOADER> Get distant object with key "HellData"
+RELOADER> PRODUCER has update HellData
 RELOADER> Get distant object with key "HellData"

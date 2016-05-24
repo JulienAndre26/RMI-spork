@@ -11,8 +11,8 @@ import java.rmi.RMISecurityManager;
 import java.util.Arrays;
 import java.util.List;
 
-import static client.subscription.messagelisteners.AvailableListeners.RELOADER;
-import static client.subscription.messagelisteners.AvailableListeners.TILTER;
+import static collection.subscription.messagelisteners.AvailableListeners.RELOADER;
+import static collection.subscription.messagelisteners.AvailableListeners.TILTER;
 
 /**
  * The Class MainClient which simulates both Producer and Consumer clients.

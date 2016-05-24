@@ -1,4 +1,4 @@
-package client.subscription;
+package collection.subscription;
 
 import client.Client;
 import org.apache.activemq.ActiveMQConnectionFactory;

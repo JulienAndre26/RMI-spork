@@ -2,10 +2,10 @@ package client;
 
 import client.interfaces.DataInterface;
 import client.interfaces.ServiceInterface;
-import client.subscription.Publisher;
-import client.subscription.Subscriber;
-import client.subscription.messagelisteners.Reloader;
-import client.subscription.messagelisteners.Tilter;
+import collection.subscription.Publisher;
+import collection.subscription.Subscriber;
+import collection.subscription.messagelisteners.Reloader;
+import collection.subscription.messagelisteners.Tilter;
 import collection.interfaces.CollectionServerInterface;
 
 import javax.naming.*;
@@ -13,8 +13,8 @@ import java.rmi.RemoteException;
 import java.util.Hashtable;
 import java.util.List;
 
-import static client.subscription.messagelisteners.AvailableListeners.RELOADER;
-import static client.subscription.messagelisteners.AvailableListeners.TILTER;
+import static collection.subscription.messagelisteners.AvailableListeners.RELOADER;
+import static collection.subscription.messagelisteners.AvailableListeners.TILTER;
 
 // TODO: ClassServer needs to work in order to delete this import
 

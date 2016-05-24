@@ -1,13 +1,12 @@
 package collection;
 
-import java.rmi.RMISecurityManager;
-import java.rmi.RemoteException;
-import java.util.Hashtable;
-
 import javax.naming.CompositeName;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import java.rmi.RMISecurityManager;
+import java.rmi.RemoteException;
+import java.util.Hashtable;
 
 /**
  * The Class MainServer which launch a single operating collection server.

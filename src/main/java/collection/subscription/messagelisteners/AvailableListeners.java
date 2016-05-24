@@ -1,4 +1,4 @@
-package client.subscription.messagelisteners;
+package collection.subscription.messagelisteners;
 
 /**
  * List of available listeners
